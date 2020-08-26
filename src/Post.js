@@ -6,24 +6,24 @@ import RepeatIcon from '@material-ui/icons/Repeat';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import PublishIcon from '@material-ui/icons/Publish';
 import './Post.css';
-
-function Post() {
+function Post({displayname, username, verified, text, image, avatar}) {
     return (
         <div className="post">
             <div className="post_avatar">
-            <Avatar src="https://avatars2.githubusercontent.com/u/47965259?s=460&u=b302cb87c973148e2410a4e7454f3b14cfcec8ab&v=4" />
+            <Avatar src= {avatar} />
             </div>
             <div className="post__body">
                 <div className="post__header">
                 <div className="post__headertext">
                     <h3>
-                        Deep Kasundra{" "} <span className="user__name"><VerifiedUserIcon className="verified__badge"/>@deepkasundra</span>  
+    {displayname}{" "} <span className="user__name">
+    {verified &&<VerifiedUserIcon  className="verified__badge"/>}{username}</span>  
                     </h3>
                     <div className="post__descrption">
-                     <p>   Hello there how are you doing!!!! </p>
+                     <p> {text} </p>
                     </div>
                     </div>
-                    <img className="post__image"  src="https://avatars2.githubusercontent.com/u/47965259?s=460&u=b302cb87c973148e2410a4e7454f3b14cfcec8ab&v=4" alt="Deep" />   
+                    <img className="post__image"  src= {image} alt="" />   
                     </div>
                 <div className="post__footer">
                     <ChatBubbleOutlineIcon fontSize="small"/>

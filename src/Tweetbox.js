@@ -1,17 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Tweetbox.css";
 import { Avatar, Button } from "@material-ui/core";
+import db from "./Firebase";
 function Tweetbox() {
+
+const [tweetmessage, setTweetmessage] = useState("");
+const [tweetimage, setTweetimage] = useState("");
+
+const sendTweet = (e) => {
+    e.preventDefault();
+
+    db.collection("posts").add({
+      displayname: "Deep Kasundra",
+      username: "deepkasundra",
+      verified: true,
+      text: tweetmessage,
+      image: tweetimage,
+      avatar: "https://pbs.twimg.com/profile_images/1097532695200972800/8lGl84vQ_400x400.jpg"
+    });
+
+    setTweetmessage("");
+    setTweetimage("");
+  };
+
+
+
+
+
+
     return (
         <div className="tweetbox">
             <form>
                 <div className="tweetbox__input">
-                    <Avatar src="https://avatars2.githubusercontent.com/u/47965259?s=460&u=b302cb87c973148e2410a4e7454f3b14cfcec8ab&v=4" />
-                    <input placeholder="What's happening?" type="text" />
+                    <Avatar src="https://pbs.twimg.com/profile_images/1097532695200972800/8lGl84vQ_400x400.jpg" />
+                    <input
+            onChange={(e) => setTweetmessage(e.target.value)}
+            value={tweetmessage}
+            placeholder="What's happening?"
+            type="text"
+          />
                 </div>
-                <input className="tweetbox__image" placeholder="Enter image URL" type="text" />
+                <input
+          value={tweetimage}
+          onChange={(e) => setTweetimage(e.target.value)}
+          className="tweetBox__imageInput"
+          placeholder="Optional: Enter image URL"
+          type="text"
+        />
 
-                <Button className="tweetbox__button">Tweet</Button>
+
+                <Button  onClick={sendTweet}
+          type="submit" className="tweetbox__button">Tweet</Button>
             </form>
         </div>
     )
